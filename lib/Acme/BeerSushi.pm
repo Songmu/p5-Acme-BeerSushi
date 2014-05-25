@@ -6,6 +6,8 @@ use utf8;
 
 our $VERSION = "0.01";
 
+use Encode ();
+
 use Mouse;
 use Mouse::Util::TypeConstraints;
 
@@ -28,8 +30,41 @@ has _chars => (
     },
 );
 
+has _char_map => (
+    is      => 'ro',
+    isa     => 'HashRef[Str]',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+
+        my ($zero, $one) = map { quotemeta $_ } @{ $self->_chars };
+        my %map;
+        for my $ascii_num (0..255) {
+            my $bin_str = unpack('B8', pack 'C', $ascii_num);
+            $bin_str =~ s/^0+//;
+            $bin_str = '0' if $bin_str eq '';
+            $bin_str =~ s/0/$zero/g;
+            $bin_str =~ s/1/$one/g;
+
+            $map{ chr($ascii_num) } = $bin_str;
+        }
+        \%map;
+    },
+);
+
 no Mouse;
 
+sub encode {
+    my ($self, $str) = @_;
+
+    my @encoded_lines;
+    for my $line (split /\n/, $str) {
+        push @encoded_lines, join(' ', map {
+            $self->_char_map->{$_};
+        } split //, Encode::encode_utf8($line));
+    }
+    join "\n", @encoded_lines;
+}
 
 1;
 __END__
