@@ -6,6 +6,9 @@ use utf8;
 use Acme::BeerSushi;
 use Path::Tiny;
 
+use Module::Load;
+use String::CamelCase qw/camelize/;
+
 sub run {
     my ($class, @argv) = @_;
 
@@ -18,8 +21,10 @@ sub run {
         return;
     }
     else {
-        # for sub commands
-        ...
+        my $sub_command = $file;
+        my $module = __PACKAGE__ . '::' . camelize($sub_command);
+        load $module;
+        $module->run(@argv);
     }
 }
 
