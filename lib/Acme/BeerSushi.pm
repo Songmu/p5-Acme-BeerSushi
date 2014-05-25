@@ -89,6 +89,14 @@ sub decode {
     join "\n", @decoded_lines;
 }
 
+sub run {
+    my ($self, $beer_sushi_code) = @_;
+
+    my $code = $self->decode($beer_sushi_code);
+    eval $code;
+    die $@ if $@;
+}
+
 1;
 __END__
 
