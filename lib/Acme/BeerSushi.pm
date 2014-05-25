@@ -1,5 +1,5 @@
 package Acme::BeerSushi;
-use 5.008005;
+use 5.008001;
 use strict;
 use warnings;
 use utf8;
@@ -104,15 +104,16 @@ __END__
 
 =head1 NAME
 
-Acme::BeerSushi - It's new $module
+Acme::BeerSushi - We love beer and sushi
 
 =head1 SYNOPSIS
 
     use Acme::BeerSushi;
+    my $beer_sushi = Acme::BeerSushi->new;
 
 =head1 DESCRIPTION
 
-Acme::BeerSushi is ...
+ALL OF OUR PLEASURES ARE BELONGS TO BEER AND SUSHI.
 
 =head1 LICENSE
 

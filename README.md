@@ -1,14 +1,15 @@
 # NAME
 
-Acme::BeerSushi - It's new $module
+Acme::BeerSushi - We love beer and sushi
 
 # SYNOPSIS
 
     use Acme::BeerSushi;
+    my $beer_sushi = Acme::BeerSushi->new;
 
 # DESCRIPTION
 
-Acme::BeerSushi is ...
+ALL OF OUR PLEASURES ARE BELONGS TO BEER AND SUSHI.
 
 # LICENSE
 
