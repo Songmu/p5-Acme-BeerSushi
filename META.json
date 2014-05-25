@@ -63,6 +63,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/Songmu/p5-Acme-BeerSushi/issues"
+      },
+      "homepage" : "https://github.com/Songmu/p5-Acme-BeerSushi",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/Songmu/p5-Acme-BeerSushi.git",
+         "web" : "https://github.com/Songmu/p5-Acme-BeerSushi"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:SONGMU"
 }
