@@ -7,10 +7,16 @@ use utf8;
 our $VERSION = "0.01";
 
 use Mouse;
+use Mouse::Util::TypeConstraints;
+
+subtype 'Acme::BeerSushi::Chars',
+  as    'Str',
+  where { length($_) == 2 && substr($_, 0, 1) ne substr($_, 1, 1) },
+  message { 'must be two and different decoded characters' };
 
 has chars => (
     is      => 'ro',
-    isa     => 'Str',
+    isa     => 'Acme::BeerSushi::Chars',
     default => sub { '🍺🍣' },
 );
 
