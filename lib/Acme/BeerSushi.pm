@@ -52,6 +52,15 @@ has _char_map => (
     },
 );
 
+has _rev_char_map => (
+    is      => 'ro',
+    isa     => 'HashRef[Str]',
+    lazy    => 1,
+    default => sub {
+        +{ reverse %{ shift->_char_map } };
+    },
+);
+
 no Mouse;
 
 sub encode {
@@ -64,6 +73,20 @@ sub encode {
         } split //, Encode::encode_utf8($line));
     }
     join "\n", @encoded_lines;
+}
+
+sub decode {
+    my ($self, $str) = @_;
+
+    my @decoded_lines;
+    for my $line (split /\n/, $str) {
+        push @decoded_lines, Encode::decode_utf8(
+            join '', map {
+                $self->_rev_char_map->{$_};
+            } split / /, $line
+        );
+    }
+    join "\n", @decoded_lines;
 }
 
 1;
